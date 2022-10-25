@@ -92,7 +92,11 @@ function MainScreen({placeCardCount}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {Array.from({length: placeCardCount}).map((i) => <RoomCard/>)}
+                <RoomCard/>
+                <RoomCard/>
+                <RoomCard/>
+                <RoomCard/>
+                <RoomCard/>
               </div>
             </section>
             <div className="cities__right-section">
