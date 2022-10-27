@@ -1,5 +1,5 @@
 import RoomCard from '../../components/room-card/room-card';
-import HeaderNav from "../../components/header-nav/header-nav";
+import HeaderNav from '../../components/header-nav/header-nav';
 
 type MainScreenProps = {
   placeCardCount: number;
