@@ -1,7 +1,7 @@
 import HeaderNav from '../../components/header-nav/header-nav';
 import Logo from '../../components/logo/logo';
 
-function RoomScreen(): JSX.Element {
+function OfferScreen(): JSX.Element {
   return (
     <>
       <header className="header">
@@ -313,4 +313,4 @@ function RoomScreen(): JSX.Element {
   );
 }
 
-export default RoomScreen;
+export default OfferScreen;
