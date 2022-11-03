@@ -1,4 +1,5 @@
 import {Offer} from '../../types/offer';
+import {Link} from 'react-router-dom';
 
 type OfferCardProps = {
   offer: Offer;
@@ -9,9 +10,9 @@ function OfferCard({offer}: OfferCardProps): JSX.Element {
     <article className="cities__card place-card">
       {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="src/components/place-card/place-card#">
-          <img className="place-card__image" src={offer.imageSrc} width="260" height="200" alt="Place image" />
-        </a>
+        <Link to={`/offer/${offer.id}`}>
+          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place image" />
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -28,7 +29,7 @@ function OfferCard({offer}: OfferCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="src/components/place-card/place-card#">{offer.name}</a>
+          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

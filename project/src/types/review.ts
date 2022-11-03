@@ -1,8 +1,11 @@
-type Review = {
-  amount: string;
-  userName: string;
-  text: string;
-  dateTime: Date;
+import {User} from './user';
+
+export type Review = {
+  comment: string;
+  date: string;
+  id: number;
+  rating: number;
+  user: User;
 }
 
 export type Reviews = Review[];

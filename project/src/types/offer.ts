@@ -1,18 +1,19 @@
 import {Host} from './host';
-import {Reviews} from './review';
 
 export type Offer = {
-  id: number;
-  isPremium: boolean;
-  imageSrc: string;
-  price: string;
-  rating: string;
-  name: string;
-  type: string;
-  features: string[];
-  insideItems: string[];
+  bedrooms: number;
+  description: string;
+  goods: string[];
   host: Host;
-  reviews: Reviews;
+  id: number;
+  images: string[];
+  isPremium: boolean;
+  maxAdults: number;
+  previewImage: string;
+  price: number;
+  rating: number;
+  title: string;
+  type: string;
 }
 
 export type Offers = Offer[];
