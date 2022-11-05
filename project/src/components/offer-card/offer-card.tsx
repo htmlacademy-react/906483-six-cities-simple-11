@@ -4,11 +4,18 @@ import {calculateRating} from '../../utils';
 
 type OfferCardProps = {
   offer: Offer;
+  onActiveSet: () => void;
+  onActiveRemove: () => void;
 };
 
-function OfferCard({offer}: OfferCardProps): JSX.Element {
+function OfferCard(props: OfferCardProps): JSX.Element {
+  const {offer, onActiveSet, onActiveRemove} = props;
   return (
-    <article className="cities__card place-card">
+    <article
+      className="cities__card place-card"
+      onMouseEnter={onActiveSet}
+      onMouseLeave={onActiveRemove}
+    >
       {offer.isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${offer.id}`}>
