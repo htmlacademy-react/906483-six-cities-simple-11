@@ -1,4 +1,5 @@
 import ReviewRating from '../review-rating/review-rating';
+import {ChangeEvent, useState} from 'react';
 
 function ReviewForm(): JSX.Element {
   const starValues = [
@@ -23,14 +24,37 @@ function ReviewForm(): JSX.Element {
       title: 'terribly',
     },
   ];
+  const formDataDefault = {
+    rating: null,
+    review: '',
+  };
+  const [formData, setFormData] = useState(formDataDefault);
+  const formFieldChangeHandle = (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    const {name, value} = evt.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {starValues.map((ratingElement) => <ReviewRating element={ratingElement} key={ratingElement.value} />)}
+        {starValues.map((ratingElement) => (
+          <ReviewRating
+            element={ratingElement}
+            key={ratingElement.value}
+            onRatingChange={formFieldChangeHandle}
+          />
+        ))}
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review"
+      <textarea
+        className="reviews__textarea form__textarea"
+        id="review"
+        name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        value={formData.review}
+        onChange={formFieldChangeHandle}
       >
       </textarea>
       <div className="reviews__button-wrapper">

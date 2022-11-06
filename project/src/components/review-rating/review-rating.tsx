@@ -1,13 +1,14 @@
-import {Fragment} from 'react';
+import {ChangeEvent, Fragment} from 'react';
 
 type ReviewRatingProps = {
   element: {
     title: string;
     value: string;
   };
+  onRatingChange: (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
 }
 
-function ReviewRating({element}: ReviewRatingProps): JSX.Element {
+function ReviewRating({element, onRatingChange}: ReviewRatingProps): JSX.Element {
   return (
     <Fragment key={element.value}>
       <input
@@ -16,6 +17,7 @@ function ReviewRating({element}: ReviewRatingProps): JSX.Element {
         value={element.value}
         id={`${element.value}-stars`}
         type="radio"
+        onChange={onRatingChange}
       />
       <label
         htmlFor={`${element.value}-stars`}
