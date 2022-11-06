@@ -23,3 +23,13 @@ export const getRandomOfferImages = (images: string[]): string[] => {
   }
   return images;
 };
+
+export const getMonthName = (date: string) => {
+  const dateValue = new Date(date);
+  return dateValue.toLocaleString('en-us', {month: 'long'});
+};
+
+export const getFullYear = (date: string) => {
+  const dateValue = new Date(date);
+  return dateValue.getFullYear();
+};
