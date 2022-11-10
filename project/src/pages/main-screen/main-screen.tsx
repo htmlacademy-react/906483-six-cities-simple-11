@@ -1,11 +1,13 @@
-import RoomCard from '../../components/room-card/room-card';
 import HeaderNav from '../../components/header-nav/header-nav';
+import {Offers} from '../../types/offer';
+import OfferList from '../../components/offer-list/offer-list';
 
 type MainScreenProps = {
   placeCardCount: number;
+  offers: Offers;
 }
 
-function MainScreen({placeCardCount}: MainScreenProps): JSX.Element {
+function MainScreen({placeCardCount, offers}: MainScreenProps): JSX.Element {
   return (
     <>
       <header className="header">
@@ -79,7 +81,7 @@ function MainScreen({placeCardCount}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {[...Array(placeCardCount).keys()].map((i) => <RoomCard key={i} />)}
+                <OfferList offers={offers} />
               </div>
             </section>
             <div className="cities__right-section">
