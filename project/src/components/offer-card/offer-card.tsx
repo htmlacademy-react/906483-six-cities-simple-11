@@ -1,7 +1,7 @@
 import {Offer} from '../../types/offer';
 import {generatePath, Link} from 'react-router-dom';
 import {calculateRating} from '../../utils';
-import {AppRoute} from "../../const";
+import {AppRoute} from '../../const';
 
 type OfferCardProps = {
   offer: Offer;
