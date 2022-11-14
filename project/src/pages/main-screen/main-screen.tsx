@@ -1,13 +1,23 @@
 import HeaderNav from '../../components/header-nav/header-nav';
-import {Offers} from '../../types/offer';
+import {Offer, Offers} from '../../types/offer';
 import OfferList from '../../components/offer-list/offer-list';
+import Map from '../../components/map/map';
+import {useState} from 'react';
+import {City} from '../../types/city';
 
 type MainScreenProps = {
-  placeCardCount: number;
   offers: Offers;
 }
 
-function MainScreen({placeCardCount, offers}: MainScreenProps): JSX.Element {
+function MainScreen({offers}: MainScreenProps): JSX.Element {
+  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(
+    undefined
+  );
+  const city: City = offers[0].city;
+  const onListItemHover = (id: number | null) => {
+    const currentPoint = offers.find((offer) => offer.id === id);
+    setSelectedPoint(currentPoint);
+  };
   return (
     <>
       <header className="header">
@@ -81,11 +91,18 @@ function MainScreen({placeCardCount, offers}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <OfferList offers={offers} />
+                <OfferList
+                  offers={offers}
+                  onListItemHover={onListItemHover}
+                />
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map
+                offers={offers}
+                selectedPoint={selectedPoint}
+                city={city}
+              />
             </div>
           </div>
         </div>
