@@ -2,6 +2,14 @@ import {Offers} from '../types/offer';
 
 export const offers: Offers = [
   {
+    'city': {
+      'name': 'Amsterdam',
+      'location': {
+        'latitude': 52.37454,
+        'longitude': 4.897976,
+        'zoom': 13
+      }
+    },
     'previewImage': 'https://11.react.pages.academy/static/hotel/1.jpg',
     'images': [
       'https://11.react.pages.academy/static/hotel/13.jpg',
@@ -41,9 +49,22 @@ export const offers: Offers = [
       'avatarUrl': 'img/avatar-angelina.jpg'
     },
     'description': 'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
+    'location': {
+      'latitude': 52.3909553943508,
+      'longitude': 4.85309666406198,
+      'zoom': 16,
+    },
     'id': 1
   },
   {
+    'city': {
+      'name': 'Amsterdam',
+      'location': {
+        'latitude': 52.37454,
+        'longitude': 4.897976,
+        'zoom': 13
+      }
+    },
     'previewImage': 'https://11.react.pages.academy/static/hotel/20.jpg',
     'images': [
       'https://11.react.pages.academy/static/hotel/5.jpg',
@@ -88,9 +109,22 @@ export const offers: Offers = [
       'avatarUrl': 'img/avatar-angelina.jpg'
     },
     'description': 'Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.',
+    'location': {
+      'latitude': 52.3609553943508,
+      'longitude': 4.85309666406198,
+      'zoom': 16,
+    },
     'id': 2
   },
   {
+    'city': {
+      'name': 'Amsterdam',
+      'location': {
+        'latitude': 52.37454,
+        'longitude': 4.897976,
+        'zoom': 13
+      }
+    },
     'previewImage': 'https://11.react.pages.academy/static/hotel/17.jpg',
     'images': [
       'https://11.react.pages.academy/static/hotel/13.jpg',
@@ -129,9 +163,22 @@ export const offers: Offers = [
       'avatarUrl': 'img/avatar-angelina.jpg'
     },
     'description': 'Relax, rejuvenate and unplug in this ultimate rustic getaway experience in the country. In our beautiful screened Pondhouse, you can gaze at the stars and listen to the sounds of nature from your cozy warm bed.',
+    'location': {
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
+      'zoom': 16,
+    },
     'id': 3
   },
   {
+    'city': {
+      'name': 'Amsterdam',
+      'location': {
+        'latitude': 52.37454,
+        'longitude': 4.897976,
+        'zoom': 13
+      }
+    },
     'previewImage': 'https://11.react.pages.academy/static/hotel/7.jpg',
     'images': [
       'https://11.react.pages.academy/static/hotel/13.jpg',
@@ -168,6 +215,11 @@ export const offers: Offers = [
       'avatarUrl': 'img/avatar-angelina.jpg'
     },
     'description': 'Discover daily local life in city center, friendly neighborhood, clandestine casino, karaoke, old-style artisans, art gallery and artist studio downstairs.',
+    'location': {
+      'latitude': 52.3809553943508,
+      'longitude': 4.939309666406198,
+      'zoom': 16,
+    },
     'id': 4
   },
 ];

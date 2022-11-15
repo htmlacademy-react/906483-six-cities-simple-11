@@ -1,6 +1,9 @@
 import {Host} from './host';
+import {Location} from './location';
+import {City} from './city';
 
 export type Offer = {
+  city: City;
   bedrooms: number;
   description: string;
   goods: string[];
@@ -8,6 +11,7 @@ export type Offer = {
   id: number;
   images: string[];
   isPremium: boolean;
+  location: Location;
   maxAdults: number;
   previewImage: string;
   price: number;

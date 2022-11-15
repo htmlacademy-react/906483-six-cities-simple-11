@@ -1,14 +1,17 @@
 import {Offer, Offers} from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
-import {useState} from 'react';
 
 type OfferListProps = {
   offers: Offers;
+  onListItemHover: (id: number | null) => void;
 }
 
-function OfferList({offers}: OfferListProps): JSX.Element {
-  const results = useState<null | number>(null);
-  const setActiveOfferId = results[1];
+function OfferList(props: OfferListProps): JSX.Element {
+  const {offers, onListItemHover} = props;
+
+  const setActiveOfferId = (id: number | null) => {
+    onListItemHover(id);
+  };
   return(
     <>
       {offers.map((offer: Offer) => (
