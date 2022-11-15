@@ -102,6 +102,7 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
                 offers={offers}
                 selectedPoint={selectedPoint}
                 city={city}
+                cssClass={"cities__map"}
               />
             </div>
           </div>

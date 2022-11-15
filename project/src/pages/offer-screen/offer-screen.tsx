@@ -6,6 +6,8 @@ import ReviewList from '../../components/review-list/review-list';
 import ReviewForm from '../../components/review-form/review-form';
 import {Offer, Offers} from '../../types/offer';
 import {Reviews} from '../../types/review';
+import Map from "../../components/map/map";
+import {City} from "../../types/city";
 
 type OfferScreenProps = {
   offers: Offers;
@@ -14,6 +16,7 @@ type OfferScreenProps = {
 
 function OfferScreen({offers, reviews}: OfferScreenProps): JSX.Element {
   const {id} = useParams();
+  const city: City = offers[0].city;
   const offer = offers.find((item) => item.id === Number(id)) as Offer;
   const {
     title,
@@ -118,7 +121,12 @@ function OfferScreen({offers, reviews}: OfferScreenProps): JSX.Element {
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map
+            city={city}
+            offers={offers}
+            selectedPoint={offer}
+            cssClass={"property__map"}
+          />
         </section>
         <div className="container">
           <section className="near-places places">
