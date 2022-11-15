@@ -5,7 +5,7 @@ import {calculateRating, getRandomOfferImages} from '../../utils';
 import ReviewList from '../../components/review-list/review-list';
 import ReviewForm from '../../components/review-form/review-form';
 import {Offer, Offers} from '../../types/offer';
-import {Review, Reviews} from '../../types/review';
+import {Reviews} from '../../types/review';
 
 type OfferScreenProps = {
   offers: Offers;
@@ -15,7 +15,6 @@ type OfferScreenProps = {
 function OfferScreen({offers, reviews}: OfferScreenProps): JSX.Element {
   const {id} = useParams();
   const offer = offers.find((item) => item.id === Number(id)) as Offer;
-  const review = reviews.find((item) => item.id === Number(id)) as Review; // todo пока нет данных с сервера
   const {
     title,
     rating,
@@ -113,8 +112,8 @@ function OfferScreen({offers, reviews}: OfferScreenProps): JSX.Element {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                <ReviewList review={review}/>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <ReviewList reviews={reviews}/>
                 <ReviewForm />
               </section>
             </div>
