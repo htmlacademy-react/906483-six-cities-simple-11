@@ -90,19 +90,18 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <OfferList
-                  offers={offers}
-                  onListItemHover={onListItemHover}
-                />
-              </div>
+              <OfferList
+                offers={offers}
+                cssClass={'cities__places-list'}
+                onListItemHover={onListItemHover}
+              />
             </section>
             <div className="cities__right-section">
               <Map
                 offers={offers}
                 selectedPoint={selectedPoint}
                 city={city}
-                cssClass={"cities__map"}
+                cssClass={'cities__map'}
               />
             </div>
           </div>

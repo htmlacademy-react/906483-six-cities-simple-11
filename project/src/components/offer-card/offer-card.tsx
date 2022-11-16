@@ -5,8 +5,8 @@ import {AppRoute} from '../../const';
 
 type OfferCardProps = {
   offer: Offer;
-  onActiveSet: () => void;
-  onActiveRemove: () => void;
+  onActiveSet?: () => void;
+  onActiveRemove?: () => void;
 };
 
 function OfferCard(props: OfferCardProps): JSX.Element {
