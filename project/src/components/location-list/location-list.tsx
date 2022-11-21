@@ -23,7 +23,7 @@ function LocationList(): JSX.Element {
       {locations.map((item) => (
         <LocationItem
           key={item}
-          value={item}
+          description={item}
           isActive={item === activeLocation.value}
         />
       )

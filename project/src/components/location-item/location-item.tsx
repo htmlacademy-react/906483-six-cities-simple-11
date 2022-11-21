@@ -1,11 +1,11 @@
 import cn from 'classnames';
 
 type LocationItemProps = {
-  value: string;
+  description: string;
   isActive: boolean;
 }
 
-function LocationItem({value, isActive}: LocationItemProps): JSX.Element {
+function LocationItem({description, isActive}: LocationItemProps): JSX.Element {
   return (
     <li className="locations__item">
       <a
@@ -15,7 +15,7 @@ function LocationItem({value, isActive}: LocationItemProps): JSX.Element {
           {'tabs__item--active': isActive}
         )}
       >
-        <span>{value}</span>
+        <span>{description}</span>
       </a>
     </li>
   );

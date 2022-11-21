@@ -22,7 +22,7 @@ function OfferList(props: OfferListProps): JSX.Element {
           offer={offer}
           key={offer.id}
           onActiveSet={() => setActiveOfferId(offer.id)}
-          onActiveRemove={() => setActiveOfferId(null)}
+          onActiveRemove={() => onListItemHover?.(null)}
         />
       ))}
     </div>
