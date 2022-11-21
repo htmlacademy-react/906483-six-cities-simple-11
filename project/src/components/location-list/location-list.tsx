@@ -1,5 +1,7 @@
 import LocationItem from '../location-item/location-item';
-import {useState} from 'react';
+import {useAppDispatch, useAppSelector} from "../../hooks";
+import {activeCity} from "../../store/action";
+import React, {EventHandler, MouseEventHandler, SyntheticEvent} from "react";
 
 const locations = [
   'Paris',
@@ -10,21 +12,23 @@ const locations = [
   'Dusseldorf',
 ];
 
-const activeLocationDefault = {
-  value: locations[0],
-};
-
 function LocationList(): JSX.Element {
-  const [activeLocation] = useState(activeLocationDefault);
+  const activeLocation = useAppSelector((state) => state.activeCity);
+  const dispatch = useAppDispatch();
+  const listClickHandle = (evt: React.MouseEvent<HTMLUListElement>) => {
+    const target = evt.target as HTMLLIElement
+    dispatch(activeCity({city: target.innerText}))
+  }
   return (
     <ul
       className="locations__list tabs__list"
+      onClick={listClickHandle}
     >
       {locations.map((item) => (
         <LocationItem
           key={item}
           description={item}
-          isActive={item === activeLocation.value}
+          isActive={item === activeLocation}
         />
       )
       )}
