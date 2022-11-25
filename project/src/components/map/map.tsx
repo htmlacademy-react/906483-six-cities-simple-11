@@ -29,10 +29,15 @@ function Map(props: MapProps): JSX.Element {
   const {city, offers, selectedPoint, cssClass} = props;
 
   const mapRef = useRef(null);
+  const markerRef = useRef<Marker[]>([]);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {
+      map.setView([city.location.latitude, city.location.longitude],
+        city.location.zoom
+      );
+      markerRef.current.forEach((marker) => marker.remove());
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
@@ -46,6 +51,7 @@ function Map(props: MapProps): JSX.Element {
               : defaultCustomIcon
           )
           .addTo(map);
+        markerRef.current.push(marker);
       });
     }
   }, [map, offers, selectedPoint]);

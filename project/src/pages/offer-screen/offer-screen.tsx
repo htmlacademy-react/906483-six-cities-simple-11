@@ -6,20 +6,21 @@ import ReviewList from '../../components/review-list/review-list';
 import ReviewForm from '../../components/review-form/review-form';
 import Map from '../../components/map/map';
 import OfferList from '../../components/offer-list/offer-list';
-import {Offer, Offers} from '../../types/offer';
+import {Offer} from '../../types/offer';
 import {Reviews} from '../../types/review';
 import {City} from '../../types/city';
+import {useAppSelector} from '../../hooks';
 
 type OfferScreenProps = {
-  offers: Offers;
   reviews: Reviews;
 }
 
-function OfferScreen({offers, reviews}: OfferScreenProps): JSX.Element {
+function OfferScreen({reviews}: OfferScreenProps): JSX.Element {
   const {id} = useParams();
-  const city: City = offers[0].city;
-  const nearOffers = offers.filter((item) => item.id !== Number(id));
-  const offer = offers.find((item) => item.id === Number(id)) as Offer;
+  const filteredOffers = useAppSelector((state) => state.filteredOffers);
+  const city: City = filteredOffers[0].city;
+  const nearOffers = filteredOffers.filter((item) => item.id !== Number(id));
+  const offer = filteredOffers.find((item) => item.id === Number(id)) as Offer;
   const {
     title,
     rating,
@@ -125,7 +126,7 @@ function OfferScreen({offers, reviews}: OfferScreenProps): JSX.Element {
           </div>
           <Map
             city={city}
-            offers={offers}
+            offers={filteredOffers}
             selectedPoint={offer}
             cssClass={'property__map'}
           />
