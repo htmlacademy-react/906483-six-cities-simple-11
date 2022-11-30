@@ -4,10 +4,15 @@ import App from './components/app/app';
 import {Provider} from 'react-redux';
 import {store} from './store';
 import {reviews} from './mocks/reviews';
+import {fetchOfferAction} from './store/api-actions';
+
+store.dispatch(fetchOfferAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
+const rootElement = document.getElementById('root') as HTMLElement;
+rootElement.classList.add('page', 'page--gray', 'page--main');
 
 root.render(
   <React.StrictMode>

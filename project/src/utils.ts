@@ -1,4 +1,5 @@
-import {MAX_OFFER_IMAGES_AMOUNT, MAX_RATING_VALUE, ONE_HUNDRED_PERCENT} from './const';
+import {MAX_OFFER_IMAGES_AMOUNT, MAX_RATING_VALUE, ONE_HUNDRED_PERCENT, SortOption} from './const';
+import {Offers} from './types/offer';
 
 const getRandomInteger = (min: number, max: number) => {
   const rand = min + Math.random() * (max + 1 - min);
@@ -33,3 +34,20 @@ export const getFullYear = (date: string) => {
   const dateValue = new Date(date);
   return dateValue.getFullYear();
 };
+
+export const getSortedOffers = (offers: Offers, sortValue: string) => {
+  switch (sortValue) {
+    case SortOption.Popular:
+      return offers;
+    case SortOption.LowToHigh:
+      return offers.sort((a, b) => a.price - b.price);
+    case SortOption.HighToLow:
+      return offers.sort((a, b) => b.price - a.price);
+    case SortOption.TopRated:
+      return offers.sort((a, b) => b.rating - a.rating);
+    default:
+      return offers;
+  }
+};
+
+export const getFilteredOffers = (offers: Offers, city: string) => offers.filter((i) => i.city.name === city);

@@ -1,21 +1,20 @@
 import cn from 'classnames';
-import React, {useState} from 'react';
+import {useState, MouseEvent} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {sortOffers} from '../../store/action';
+import {setActiveSortValue} from '../../store/action';
 import {SortOption} from '../../const';
 
 function SortOptions(): JSX.Element {
   const dispatch = useAppDispatch();
   const activeSortValue = useAppSelector((state) => state.activeSortValue);
-
   const [isSortOpen, setSortVisible] = useState(false);
-  const changeSortVisibleHandle = (evt: React.MouseEvent<HTMLSpanElement>) => {
+
+  const changeSortVisibleHandle = (evt: MouseEvent<HTMLSpanElement>) => {
     setSortVisible(!isSortOpen);
   };
-
-  const optionClickHandle = (evt: React.MouseEvent<HTMLUListElement>) => {
+  const optionClickHandle = (evt: MouseEvent<HTMLUListElement>) => {
     const target = evt.target as HTMLLIElement;
-    dispatch(sortOffers({sortValue: target.innerText}));
+    dispatch(setActiveSortValue({sortValue: target.innerText}));
   };
 
   return (

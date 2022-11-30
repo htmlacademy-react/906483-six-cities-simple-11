@@ -1,5 +1,7 @@
+import {MouseEvent} from 'react';
 import LocationItem from '../location-item/location-item';
-import React from 'react';
+import {activeCity} from '../../store/action';
+import {useAppDispatch} from '../../hooks';
 
 const locations = [
   'Paris',
@@ -12,10 +14,14 @@ const locations = [
 
 type LocationListProps = {
   activeLocation: string;
-  locationListClickHandle: (evt: React.MouseEvent<HTMLUListElement>) => void;
 }
 
-function LocationList({activeLocation, locationListClickHandle}: LocationListProps): JSX.Element {
+function LocationList({activeLocation}: LocationListProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const locationListClickHandle = (evt: MouseEvent<HTMLUListElement>) => {
+    const target = evt.target as HTMLLIElement;
+    dispatch(activeCity({city: target.innerText}));
+  };
   return (
     <ul
       className="locations__list tabs__list"

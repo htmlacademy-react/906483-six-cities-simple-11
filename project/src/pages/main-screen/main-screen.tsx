@@ -2,29 +2,23 @@ import HeaderNav from '../../components/header-nav/header-nav';
 import {Offer} from '../../types/offer';
 import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {City} from '../../types/city';
 import LocationList from '../../components/location-list/location-list';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {activeCity, filterOffers} from '../../store/action';
+import {useAppSelector} from '../../hooks';
 import SortOptions from '../../components/sort-options/sort-options';
+import {getFilteredOffers} from '../../utils';
 
 function MainScreen(): JSX.Element {
-  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(
-    undefined
-  );
+  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
+
   const activeLocation = useAppSelector((state) => state.activeCity);
-  const filteredOffers = useAppSelector((state) => state.filteredOffers);
+  const offers = useAppSelector((state) => state.offers);
   const onListItemHover = (id: number | null) => {
-    const currentPoint = filteredOffers.find((offer) => offer.id === id);
+    const currentPoint = offers.find((offer) => offer.id === id);
     setSelectedPoint(currentPoint);
   };
-  const dispatch = useAppDispatch();
-  const locationListClickHandle = (evt: React.MouseEvent<HTMLUListElement>) => {
-    const target = evt.target as HTMLLIElement;
-    dispatch(activeCity({city: target.innerText}));
-    dispatch(filterOffers());
-  };
+  const filteredOffers = getFilteredOffers(offers, activeLocation);
   const city: City = filteredOffers[0].city;
   return (
     <>
@@ -46,7 +40,6 @@ function MainScreen(): JSX.Element {
           <section className="locations container">
             <LocationList
               activeLocation={activeLocation}
-              locationListClickHandle={locationListClickHandle}
             />
           </section>
         </div>
