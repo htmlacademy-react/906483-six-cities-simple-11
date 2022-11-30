@@ -1,24 +1,30 @@
 import HeaderNav from '../../components/header-nav/header-nav';
-import {Offer, Offers} from '../../types/offer';
+import {Offer} from '../../types/offer';
 import OfferList from '../../components/offer-list/offer-list';
 import Map from '../../components/map/map';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {City} from '../../types/city';
 import LocationList from '../../components/location-list/location-list';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {activeCity, filterOffers} from '../../store/action';
 
-type MainScreenProps = {
-  offers: Offers;
-}
-
-function MainScreen({offers}: MainScreenProps): JSX.Element {
+function MainScreen(): JSX.Element {
   const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(
     undefined
   );
-  const city: City = offers[0].city;
+  const activeLocation = useAppSelector((state) => state.activeCity);
+  const filteredOffers = useAppSelector((state) => state.filteredOffers);
   const onListItemHover = (id: number | null) => {
-    const currentPoint = offers.find((offer) => offer.id === id);
+    const currentPoint = filteredOffers.find((offer) => offer.id === id);
     setSelectedPoint(currentPoint);
   };
+  const dispatch = useAppDispatch();
+  const locationListClickHandle = (evt: React.MouseEvent<HTMLUListElement>) => {
+    const target = evt.target as HTMLLIElement;
+    dispatch(activeCity({city: target.innerText}));
+    dispatch(filterOffers());
+  };
+  const city: City = filteredOffers[0].city;
   return (
     <>
       <header className="header">
@@ -37,14 +43,17 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationList />
+            <LocationList
+              activeLocation={activeLocation}
+              locationListClickHandle={locationListClickHandle}
+            />
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">312 places to stay in Amsterdam</b>
+              <b className="places__found">{`${filteredOffers.length}`} places to stay in {`${activeLocation}`}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -61,14 +70,14 @@ function MainScreen({offers}: MainScreenProps): JSX.Element {
                 </ul>
               </form>
               <OfferList
-                offers={offers}
+                offers={filteredOffers}
                 cssClass={'cities__places-list'}
                 onListItemHover={onListItemHover}
               />
             </section>
             <div className="cities__right-section">
               <Map
-                offers={offers}
+                offers={filteredOffers}
                 selectedPoint={selectedPoint}
                 city={city}
                 cssClass={'cities__map'}
