@@ -1,4 +1,5 @@
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig} from 'axios';
+import {toast} from 'react-toastify';
 import { getToken } from './token';
 
 const BACKEND_URL = 'https://11.react.pages.academy/six-cities-simple';
@@ -26,7 +27,7 @@ export const createAPI = (): AxiosInstance => {
     (response) => response,
     (error: AxiosError<{error: string}>) => {
       if (error.response) {
-        // toast.warn(error.response.data.error);
+        toast.warn(error.response.data.error);
       }
 
       throw error;

@@ -1,10 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app/app';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {Provider} from 'react-redux';
+import {checkAuthAction, fetchOfferAction} from './store/api-actions';
+import App from './components/app/app';
 import {store} from './store';
 import {reviews} from './mocks/reviews';
-import {checkAuthAction, fetchOfferAction} from './store/api-actions';
 
 store.dispatch(fetchOfferAction());
 store.dispatch(checkAuthAction());
@@ -18,6 +20,7 @@ rootElement.classList.add('page', 'page--gray', 'page--main');
 root.render(
   <React.StrictMode>
     <Provider store = {store}>
+      <ToastContainer />
       <App
         reviews={reviews}
       />
