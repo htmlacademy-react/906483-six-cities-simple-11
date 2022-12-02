@@ -8,9 +8,9 @@ function SortOptions(): JSX.Element {
   const dispatch = useAppDispatch();
   const activeSortValue = useAppSelector((state) => state.activeSortValue);
 
-  const [isSortOpen, setSortVisible] = useState(false);
+  const [isSortVisible, setSortVisible] = useState(false);
   const changeSortVisibleHandle = (evt: MouseEvent<HTMLSpanElement>) => {
-    setSortVisible(!isSortOpen);
+    setSortVisible(!isSortVisible);
   };
 
   const optionClickHandle = (evt: MouseEvent<HTMLUListElement>) => {
@@ -34,7 +34,7 @@ function SortOptions(): JSX.Element {
       <ul className={cn(
         'places__options',
         'places__options--custom',
-        {'places__options--opened': isSortOpen}
+        {'places__options--opened': isSortVisible}
       )}
       onClick={optionClickHandle}
       >
