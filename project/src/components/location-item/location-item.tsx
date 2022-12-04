@@ -1,7 +1,7 @@
 import cn from 'classnames';
-import {useAppDispatch} from "../../hooks";
-import {MouseEvent} from "react";
-import {activeCity} from "../../store/action";
+import {useAppDispatch} from '../../hooks';
+import {MouseEvent} from 'react';
+import {activeCity} from '../../store/action';
 
 type LocationItemProps = {
   description: string;
