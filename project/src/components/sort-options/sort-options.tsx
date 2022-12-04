@@ -12,7 +12,7 @@ function SortOptions(): JSX.Element {
   const changeSortVisibleHandle = (evt: MouseEvent<HTMLSpanElement>) => {
     setSortVisible(!isSortVisible);
   };
-  const optionClickHandle = (evt: MouseEvent<HTMLUListElement>) => {
+  const optionClickHandle = (evt: MouseEvent) => {
     const target = evt.target as HTMLLIElement;
     dispatch(setActiveSortValue({sortValue: target.innerText}));
   };
