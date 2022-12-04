@@ -1,5 +1,4 @@
 import LocationItem from '../location-item/location-item';
-import React from 'react';
 
 const locations = [
   'Paris',
@@ -12,15 +11,11 @@ const locations = [
 
 type LocationListProps = {
   activeLocation: string;
-  locationListClickHandle: (evt: React.MouseEvent<HTMLUListElement>) => void;
 }
 
-function LocationList({activeLocation, locationListClickHandle}: LocationListProps): JSX.Element {
+function LocationList({activeLocation}: LocationListProps): JSX.Element {
   return (
-    <ul
-      className="locations__list tabs__list"
-      onClick={locationListClickHandle}
-    >
+    <ul className="locations__list tabs__list">
       {locations.map((item) => (
         <LocationItem
           key={item}

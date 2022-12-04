@@ -1,5 +1,5 @@
 import {useParams} from 'react-router-dom';
-import {calculateRating, getRandomOfferImages} from '../../utils';
+import {calculateRating, getFilteredOffers, getRandomOfferImages} from '../../utils';
 import HeaderNav from '../../components/header-nav/header-nav';
 import Logo from '../../components/logo/logo';
 import ReviewList from '../../components/review-list/review-list';
@@ -17,8 +17,12 @@ type OfferScreenProps = {
 
 function OfferScreen({reviews}: OfferScreenProps): JSX.Element {
   const {id} = useParams();
-  const filteredOffers = useAppSelector((state) => state.filteredOffers);
+  const activeLocation = useAppSelector((state) => state.activeCity);
+  const offers = useAppSelector((state) => state.offers);
+
+  const filteredOffers = getFilteredOffers(offers, activeLocation);
   const city: City = filteredOffers[0].city;
+
   const nearOffers = filteredOffers.filter((item) => item.id !== Number(id));
   const offer = filteredOffers.find((item) => item.id === Number(id)) as Offer;
   const {
