@@ -1,7 +1,4 @@
-import {MouseEvent} from 'react';
 import LocationItem from '../location-item/location-item';
-import {activeCity} from '../../store/action';
-import {useAppDispatch} from '../../hooks';
 
 const locations = [
   'Paris',
@@ -17,16 +14,8 @@ type LocationListProps = {
 }
 
 function LocationList({activeLocation}: LocationListProps): JSX.Element {
-  const dispatch = useAppDispatch();
-  const locationListClickHandle = (evt: MouseEvent<HTMLUListElement>) => {
-    const target = evt.target as HTMLLIElement;
-    dispatch(activeCity({city: target.innerText}));
-  };
   return (
-    <ul
-      className="locations__list tabs__list"
-      onClick={locationListClickHandle}
-    >
+    <ul className="locations__list tabs__list">
       {locations.map((item) => (
         <LocationItem
           key={item}
