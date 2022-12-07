@@ -1,27 +1,11 @@
 import HeaderNav from '../../components/header-nav/header-nav';
-import {Offer} from '../../types/offer';
-import OfferList from '../../components/offer-list/offer-list';
-import Map from '../../components/map/map';
-import {useState} from 'react';
-import {City} from '../../types/city';
 import LocationList from '../../components/location-list/location-list';
-import {useAppSelector} from '../../hooks';
-import SortOptions from '../../components/sort-options/sort-options';
-import {getFilteredOffers} from '../../utils';
+import {useAppSelector} from "../../hooks";
+import MainPageContent from "../../components/main-page-content/main-page-content";
+import MainPageEmpty from "../../components/main-page-empty/main-page-empty";
 
 function MainScreen(): JSX.Element {
-  const activeLocation = useAppSelector((state) => state.activeCity);
   const offers = useAppSelector((state) => state.offers);
-
-  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
-
-  const onListItemHover = (id: number | null) => {
-    const currentPoint = offers.find((offer) => offer.id === id);
-    setSelectedPoint(currentPoint);
-  };
-  const filteredOffers = getFilteredOffers(offers, activeLocation);
-  const city: City = filteredOffers[0].city;
-
   return (
     <>
       <header className="header">
@@ -40,32 +24,11 @@ function MainScreen(): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationList
-              activeLocation={activeLocation}
-            />
+            <LocationList />
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{`${filteredOffers.length}`} places to stay in {`${activeLocation}`}</b>
-              <SortOptions />
-              <OfferList
-                offers={filteredOffers}
-                cssClass={'cities__places-list'}
-                onListItemHover={onListItemHover}
-              />
-            </section>
-            <div className="cities__right-section">
-              <Map
-                offers={filteredOffers}
-                selectedPoint={selectedPoint}
-                city={city}
-                cssClass={'cities__map'}
-              />
-            </div>
-          </div>
+          {offers.length ? <MainPageContent /> : <MainPageEmpty />}
         </div>
       </main>
     </>
