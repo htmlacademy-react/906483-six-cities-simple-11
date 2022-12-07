@@ -1,32 +1,39 @@
 import {useParams} from 'react-router-dom';
-import {calculateRating, getFilteredOffers, getRandomOfferImages} from '../../utils';
+import {useEffect} from 'react';
+import {useAppSelector} from '../../hooks';
+import {calculateRating, getRandomOfferImages} from '../../utils';
+import {store} from '../../store';
+import {Offer} from '../../types/offer';
+import {fetchNearbyOffers, fetchOfferAction, fetchReviews} from '../../store/api-actions';
 import HeaderNav from '../../components/header-nav/header-nav';
 import Logo from '../../components/logo/logo';
 import ReviewList from '../../components/review-list/review-list';
 import ReviewForm from '../../components/review-form/review-form';
 import Map from '../../components/map/map';
 import OfferList from '../../components/offer-list/offer-list';
-import {Offer} from '../../types/offer';
-import {Reviews} from '../../types/review';
-import {City} from '../../types/city';
-import {useAppSelector} from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
 
-type OfferScreenProps = {
-  reviews: Reviews;
-}
-
-function OfferScreen({reviews}: OfferScreenProps): JSX.Element {
+function OfferScreen(): JSX.Element {
   const {id} = useParams();
-  const activeLocation = useAppSelector((state) => state.activeCity);
-  const offers = useAppSelector((state) => state.offers);
+  const currentOfferId = String(id);
+
+  useEffect(() => {
+    store.dispatch(fetchOfferAction((currentOfferId)));
+    store.dispatch(fetchNearbyOffers((currentOfferId)));
+    store.dispatch(fetchReviews((currentOfferId)));
+  }, [currentOfferId]);
+
   const isUserData = useAppSelector((state) => Boolean(state.userData));
+  const offer = useAppSelector((state) => state.offer) as Offer;
+  const nearOffers = useAppSelector((state) => state.nearbyOffers);
+  const reviews = useAppSelector((state) => state.reviews);
 
-  const filteredOffers = getFilteredOffers(offers, activeLocation);
-  const city: City = filteredOffers[0].city;
+  if (!offer) {
+    return <LoadingScreen />;
+  }
 
-  const nearOffers = filteredOffers.filter((item) => item.id !== Number(id));
-  const offer = filteredOffers.find((item) => item.id === Number(id)) as Offer;
   const {
+    city,
     title,
     rating,
     type,
@@ -131,7 +138,7 @@ function OfferScreen({reviews}: OfferScreenProps): JSX.Element {
           </div>
           <Map
             city={city}
-            offers={filteredOffers}
+            offers={nearOffers}
             selectedPoint={offer}
             cssClass={'property__map'}
           />

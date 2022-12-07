@@ -10,16 +10,18 @@ import SortOptions from '../../components/sort-options/sort-options';
 import {getFilteredOffers} from '../../utils';
 
 function MainScreen(): JSX.Element {
-  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
-
   const activeLocation = useAppSelector((state) => state.activeCity);
   const offers = useAppSelector((state) => state.offers);
+
+  const [selectedPoint, setSelectedPoint] = useState<Offer | undefined>(undefined);
+
   const onListItemHover = (id: number | null) => {
     const currentPoint = offers.find((offer) => offer.id === id);
     setSelectedPoint(currentPoint);
   };
   const filteredOffers = getFilteredOffers(offers, activeLocation);
   const city: City = filteredOffers[0].city;
+
   return (
     <>
       <header className="header">

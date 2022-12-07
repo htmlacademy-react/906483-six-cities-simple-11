@@ -1,5 +1,6 @@
 import {useRef, useEffect} from 'react';
 import {Icon, Marker} from 'leaflet';
+import leaflet from 'leaflet';
 import useMap from '../../hooks/use-map';
 import {Offers, Offer} from '../../types/offer';
 import {City} from '../../types/city';
@@ -27,13 +28,13 @@ const currentCustomIcon = new Icon({
 
 function Map(props: MapProps): JSX.Element {
   const {city, offers, selectedPoint, cssClass} = props;
-
   const mapRef = useRef(null);
   const markerRef = useRef<Marker[]>([]);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {
+      const markers = leaflet.layerGroup().addTo(map);
       map.setView([city.location.latitude, city.location.longitude],
         city.location.zoom
       );
@@ -43,16 +44,19 @@ function Map(props: MapProps): JSX.Element {
           lat: offer.location.latitude,
           lng: offer.location.longitude,
         });
-
-        marker
-          .setIcon(
-            selectedPoint !== undefined && offer.id === selectedPoint.id
-              ? currentCustomIcon
-              : defaultCustomIcon
-          )
-          .addTo(map);
+        marker.setIcon(defaultCustomIcon).addTo(markers);
         markerRef.current.push(marker);
       });
+      if (selectedPoint) {
+        const currentOffer = new Marker({
+          lat: selectedPoint.location.latitude,
+          lng: selectedPoint.location.longitude,
+        });
+        currentOffer.setIcon(currentCustomIcon).addTo(markers);
+      }
+      return () => {
+        markers.clearLayers();
+      };
     }
   }, [map, offers, selectedPoint]);
 
