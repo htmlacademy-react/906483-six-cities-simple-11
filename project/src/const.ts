@@ -27,3 +27,9 @@ export enum APIRoute {
   Nearby = '/nearby',
   Comments = '/comments',
 }
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}

@@ -19,6 +19,7 @@ function OfferScreen({reviews}: OfferScreenProps): JSX.Element {
   const {id} = useParams();
   const activeLocation = useAppSelector((state) => state.activeCity);
   const offers = useAppSelector((state) => state.offers);
+  const isUserData = useAppSelector((state) => Boolean(state.userData));
 
   const filteredOffers = getFilteredOffers(offers, activeLocation);
   const city: City = filteredOffers[0].city;
@@ -124,7 +125,7 @@ function OfferScreen({reviews}: OfferScreenProps): JSX.Element {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ReviewList reviews={reviews}/>
-                <ReviewForm />
+                {isUserData && <ReviewForm />}
               </section>
             </div>
           </div>
