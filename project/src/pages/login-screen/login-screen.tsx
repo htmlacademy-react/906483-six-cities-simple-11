@@ -1,21 +1,21 @@
 import Logo from '../../components/logo/logo';
 import {FormEvent, useRef} from 'react';
+import {Navigate} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {AuthData} from '../../types/auth-data';
 import {loginAction} from '../../store/api-actions';
-import {AppRoute, AuthorizationStatus} from "../../const";
-import {Navigate} from "react-router-dom";
+import {AppRoute, AuthorizationStatus} from '../../const';
 
 function LoginScreen(): JSX.Element {
   const authStatus = useAppSelector((state) => state.authorizationStatus);
   const dispatch = useAppDispatch();
 
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
   if (authStatus === AuthorizationStatus.Auth) {
     return <Navigate to={AppRoute.Main} />;
   }
-
-  const loginRef = useRef<HTMLInputElement | null>(null);
-  const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));

@@ -1,8 +1,8 @@
 import HeaderNav from '../../components/header-nav/header-nav';
 import LocationList from '../../components/location-list/location-list';
-import {useAppSelector} from "../../hooks";
-import MainPageContent from "../../components/main-page-content/main-page-content";
-import MainPageEmpty from "../../components/main-page-empty/main-page-empty";
+import {useAppSelector} from '../../hooks';
+import MainPageContent from '../../components/main-page-content/main-page-content';
+import MainPageEmpty from '../../components/main-page-empty/main-page-empty';
 
 function MainScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);

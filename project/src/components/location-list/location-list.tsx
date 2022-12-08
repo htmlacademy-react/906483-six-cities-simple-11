@@ -1,5 +1,5 @@
 import LocationItem from '../location-item/location-item';
-import {useAppSelector} from "../../hooks";
+import {useAppSelector} from '../../hooks';
 
 const locations = [
   'Paris',
