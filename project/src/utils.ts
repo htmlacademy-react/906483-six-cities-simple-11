@@ -1,5 +1,6 @@
 import {MAX_OFFER_IMAGES_AMOUNT, MAX_RATING_VALUE, ONE_HUNDRED_PERCENT, SortOption} from './const';
 import {Offers} from './types/offer';
+import {Reviews} from './types/review';
 
 const getRandomInteger = (min: number, max: number) => {
   const rand = min + Math.random() * (max + 1 - min);
@@ -34,6 +35,8 @@ export const getFullYear = (date: string) => {
   const dateValue = new Date(date);
   return dateValue.getFullYear();
 };
+
+export const getSortedReviewsByDate = (reviews: Reviews) => reviews.slice(0).sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
 export const getSortedOffers = (offers: Offers, sortValue: string) => {
   switch (sortValue) {
