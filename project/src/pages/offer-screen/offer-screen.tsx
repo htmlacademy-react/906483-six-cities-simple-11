@@ -132,7 +132,7 @@ function OfferScreen(): JSX.Element {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ReviewList reviews={reviews}/>
-                {isUserData && <ReviewForm />}
+                {isUserData && <ReviewForm offerId={currentOfferId}/>}
               </section>
             </div>
           </div>
