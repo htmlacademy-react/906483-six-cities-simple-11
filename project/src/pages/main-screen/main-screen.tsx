@@ -1,25 +1,14 @@
-import HeaderNav from '../../components/header-nav/header-nav';
-import LocationList from '../../components/location-list/location-list';
 import {useAppSelector} from '../../hooks';
+import LocationList from '../../components/location-list/location-list';
 import MainPageContent from '../../components/main-page-content/main-page-content';
 import MainPageEmpty from '../../components/main-page-empty/main-page-empty';
+import Header from '../../components/header/header';
 
 function MainScreen(): JSX.Element {
   const offers = useAppSelector((state) => state.offers);
   return (
     <>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <a className="header__logo-link header__logo-link--active">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
-            </div>
-            <HeaderNav />
-          </div>
-        </div>
-      </header>
+      <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
