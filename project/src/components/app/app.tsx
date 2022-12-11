@@ -4,22 +4,17 @@ import MainScreen from '../../pages/main-screen/main-screen';
 import LoginScreen from '../../pages/login-screen/login-screen';
 import OfferScreen from '../../pages/offer-screen/offer-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import {Reviews} from '../../types/review';
 import {useAppSelector} from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 
-type AppScreenProps = {
-  reviews: Reviews;
-}
+function App(): JSX.Element {
+  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
 
-function App({reviews}: AppScreenProps): JSX.Element {
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-
-  if (isOffersDataLoading) {
+  if (isDataLoaded) {
     return (
-      <LoadingScreen />
+      <LoadingScreen/>
     );
   }
 
@@ -28,9 +23,7 @@ function App({reviews}: AppScreenProps): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={
-            <MainScreen />
-          }
+          element={<MainScreen/>}
         />
         <Route
           path={AppRoute.Login}
@@ -38,15 +31,11 @@ function App({reviews}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Offer}
-          element={
-            <OfferScreen
-              reviews={reviews}
-            />
-          }
+          element={<OfferScreen/>}
         />
         <Route
           path={AppRoute.NotFound}
-          element={<NotFoundScreen />}
+          element={<NotFoundScreen/>}
         />
       </Routes>
     </HistoryRouter>

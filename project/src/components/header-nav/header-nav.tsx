@@ -13,7 +13,7 @@ function HeaderNav(): JSX.Element {
         <li className="header__nav-item user">
           <div className="header__nav-profile">
             <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-            <span className="header__user-name user__name">{ userData?.email }</span>
+            { userData?.email && <span className="header__user-name user__name">{userData.email}</span> }
           </div>
         </li>
         <li className="header__nav-item">

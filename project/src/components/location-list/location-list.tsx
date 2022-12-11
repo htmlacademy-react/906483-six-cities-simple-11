@@ -1,4 +1,5 @@
 import LocationItem from '../location-item/location-item';
+import {useAppSelector} from '../../hooks';
 
 const locations = [
   'Paris',
@@ -9,11 +10,8 @@ const locations = [
   'Dusseldorf',
 ];
 
-type LocationListProps = {
-  activeLocation: string;
-}
-
-function LocationList({activeLocation}: LocationListProps): JSX.Element {
+function LocationList(): JSX.Element {
+  const activeLocation = useAppSelector((state) => state.activeCity);
   return (
     <ul className="locations__list tabs__list">
       {locations.map((item) => (
