@@ -1,7 +1,8 @@
 import {useAppSelector} from '../../hooks';
+import {getActiveCity} from '../../store/app-process/selectors';
 
 function MainPageEmpty(): JSX.Element {
-  const activeLocation = useAppSelector((state) => state.activeCity);
+  const activeLocation = useAppSelector(getActiveCity);
   return (
     <div className="cities__places-container cities__places-container--empty container">
       <section className="cities__no-places">

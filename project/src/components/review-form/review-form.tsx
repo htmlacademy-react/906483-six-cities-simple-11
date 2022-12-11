@@ -1,7 +1,7 @@
 import ReviewRating from '../review-rating/review-rating';
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {useAppDispatch} from '../../hooks';
-import {reviewAction} from '../../store/api-actions';
+import {sendReviewAction} from '../../store/api-actions';
 import {MIN_OFFER_SCORE, ReviewTextLength} from '../../const';
 import './review-form.css';
 
@@ -57,9 +57,7 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
 
   const formSubmitHandle = (event: FormEvent) => {
     event.preventDefault();
-    isFormDisabled = true;
-    return;
-    dispatch(reviewAction({
+    dispatch(sendReviewAction({
       id: offerId,
       rating: Number(formData.rating),
       comment: formData.review

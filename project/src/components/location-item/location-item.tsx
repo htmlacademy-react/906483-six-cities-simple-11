@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import {useAppDispatch} from '../../hooks';
 import {MouseEvent} from 'react';
-import {activeCity} from '../../store/action';
+import {setActiveCity} from '../../store/app-process/app-process';
 
 type LocationItemProps = {
   description: string;
@@ -12,7 +12,7 @@ function LocationItem({description, isActive}: LocationItemProps): JSX.Element {
   const dispatch = useAppDispatch();
   const locationItemClickHandle = (evt: MouseEvent) => {
     const target = evt.target as HTMLLIElement;
-    dispatch(activeCity({city: target.innerText}));
+    dispatch(setActiveCity(target.innerText));
   };
   return (
     <li

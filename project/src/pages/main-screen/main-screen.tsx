@@ -3,9 +3,10 @@ import LocationList from '../../components/location-list/location-list';
 import MainPageContent from '../../components/main-page-content/main-page-content';
 import MainPageEmpty from '../../components/main-page-empty/main-page-empty';
 import Header from '../../components/header/header';
+import {getOffers} from '../../store/offer-data/selectors';
 
 function MainScreen(): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
   return (
     <>
       <Header />
