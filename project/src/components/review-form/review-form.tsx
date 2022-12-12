@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {sendReviewAction} from '../../store/api-actions';
 import {MIN_OFFER_SCORE, ReviewTextLength} from '../../const';
 import './review-form.css';
-import {getReviewFormDisabledStatus} from "../../store/offer-data/selectors";
+import {getReviewFormDisabledStatus} from '../../store/offer-data/selectors';
 
 const starValues = [
   {

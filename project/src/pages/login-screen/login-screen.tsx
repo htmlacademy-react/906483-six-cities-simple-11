@@ -6,7 +6,7 @@ import {AuthData} from '../../types/auth-data';
 import {loginAction} from '../../store/api-actions';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {getAuthorizationStatus} from '../../store/user-process/selectors';
-import {toast} from "react-toastify";
+import {toast} from 'react-toastify';
 
 function LoginScreen(): JSX.Element {
   const authStatus = useAppSelector(getAuthorizationStatus);
