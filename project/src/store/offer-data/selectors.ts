@@ -1,6 +1,6 @@
 import {createSelector} from '@reduxjs/toolkit';
 import {State} from '../../types/state';
-import {NameSpace, SortOption} from '../../const';
+import {MAX_REVIEW_COUNT, NameSpace, SortOption} from '../../const';
 import {Offer, Offers} from '../../types/offer';
 import {Reviews} from '../../types/review';
 import {getActiveCity, getActiveSortValue} from '../app-process/selectors';
@@ -32,3 +32,8 @@ export const getSortedOffers = createSelector(
     }
   }
 );
+export const getSortedReviewsByDate = createSelector(
+  [getReviews],
+  (reviews: Reviews) => reviews.slice(0).sort((a, b) => Date.parse(b.date) - Date.parse(a.date)).slice(0, MAX_REVIEW_COUNT)
+);
+

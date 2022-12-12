@@ -11,7 +11,7 @@ import OfferList from '../../components/offer-list/offer-list';
 import LoadingScreen from '../loading-screen/loading-screen';
 import Header from '../../components/header/header';
 import {getUserData} from '../../store/user-process/selectors';
-import {getNearbyOffers, getOffer, getReviews} from '../../store/offer-data/selectors';
+import {getNearbyOffers, getOffer, getSortedReviewsByDate} from '../../store/offer-data/selectors';
 
 function OfferScreen(): JSX.Element {
   const {id} = useParams();
@@ -26,8 +26,7 @@ function OfferScreen(): JSX.Element {
   const isUserData = useAppSelector(getUserData);
   const offer = useAppSelector(getOffer);
   const nearOffers = useAppSelector(getNearbyOffers);
-  const reviews = useAppSelector(getReviews);
-
+  const reviews = useAppSelector(getSortedReviewsByDate);
   if (!offer) {
     return <LoadingScreen />;
   }
