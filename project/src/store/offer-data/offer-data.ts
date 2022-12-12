@@ -1,13 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {OfferData} from '../../types/state';
 import {NameSpace} from '../../const';
-import {
-  fetchNearbyOffers,
-  fetchOfferAction,
-  fetchOffersAction,
-  fetchReviews,
-  sendReviewAction,
-} from '../api-actions';
+import {fetchNearbyOffers, fetchOfferAction, fetchOffersAction, fetchReviews, sendReviewAction,} from '../api-actions';
 
 const initialState: OfferData = {
   offers: [],
@@ -15,7 +9,7 @@ const initialState: OfferData = {
   nearbyOffers: [],
   reviews: [],
   isDataLoaded: false,
-  isOfferRequestError: false
+  isReviewFormDisabled: false,
 };
 
 export const offerData = createSlice({
@@ -35,14 +29,8 @@ export const offerData = createSlice({
         state.isDataLoaded = false;
       })
 
-      .addCase(fetchOfferAction.pending, (state, action) => {
-        state.isOfferRequestError = false;
-      })
       .addCase(fetchOfferAction.fulfilled, (state, action) => {
         state.offer = action.payload;
-      })
-      .addCase(fetchOfferAction.rejected, (state, action) => {
-        state.isOfferRequestError = true;
       })
 
       .addCase(fetchNearbyOffers.fulfilled, (state, action) => {
@@ -53,8 +41,15 @@ export const offerData = createSlice({
         state.reviews = action.payload;
       })
 
+      .addCase(sendReviewAction.pending, (state) => {
+        state.isReviewFormDisabled = true;
+      })
       .addCase(sendReviewAction.fulfilled, (state, action) => {
+        state.isReviewFormDisabled = false;
         state.reviews = action.payload;
+      })
+      .addCase(sendReviewAction.rejected, (state) => {
+        state.isReviewFormDisabled = false;
       });
   }
 });

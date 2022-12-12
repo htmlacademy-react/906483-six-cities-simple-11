@@ -24,5 +24,5 @@ export type OfferData = {
   nearbyOffers: Offers;
   reviews: Reviews;
   isDataLoaded: boolean;
-  isOfferRequestError: boolean;
+  isReviewFormDisabled: boolean,
 }

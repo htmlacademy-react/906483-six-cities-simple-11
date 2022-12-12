@@ -10,6 +10,7 @@ export const getOffers = (state: State): Offers => state[NameSpace.Data].offers;
 export const getOffer = (state: State): Offer => <Offer>state[NameSpace.Data].offer;
 export const getNearbyOffers = (state: State): Offers => state[NameSpace.Data].nearbyOffers;
 export const getReviews = (state: State): Reviews => state[NameSpace.Data].reviews;
+export const getReviewFormDisabledStatus = (state: State): boolean => state[NameSpace.Data].isReviewFormDisabled;
 export const getFilteredOffers = createSelector(
   [getOffers, getActiveCity],
   (offers: Offers, activeCity) => offers.filter((i) => i.city.name === activeCity)

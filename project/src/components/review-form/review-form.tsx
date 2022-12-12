@@ -1,9 +1,10 @@
 import ReviewRating from '../review-rating/review-rating';
 import {ChangeEvent, FormEvent, useState} from 'react';
-import {useAppDispatch} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {sendReviewAction} from '../../store/api-actions';
 import {MIN_OFFER_SCORE, ReviewTextLength} from '../../const';
 import './review-form.css';
+import {getReviewFormDisabledStatus} from "../../store/offer-data/selectors";
 
 const starValues = [
   {
@@ -34,7 +35,7 @@ type ReviewFormProps = {
 
 function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
   const dispatch = useAppDispatch();
-  let isFormDisabled = false;
+  const isFormDisabled = useAppSelector(getReviewFormDisabledStatus);
   const formDataDefault = {
     rating: '',
     review: '',
@@ -43,7 +44,6 @@ function ReviewForm({offerId}: ReviewFormProps): JSX.Element {
   const [formData, setFormData] = useState(formDataDefault);
   const formFieldChangeHandle = (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const {name, value} = evt.target;
-    isFormDisabled = true;
     setFormData({
       ...formData,
       [name]: value,
