@@ -11,7 +11,7 @@ export const calculateRating = (rating: number): number => {
 };
 
 export const getRandomOfferImages = (images: string[]): string[] => {
-  const imagesCopy = images.slice(0);
+  const imagesCopy = images.slice();
   if (imagesCopy.length >= MAX_OFFER_IMAGES_AMOUNT) {
     const selectedImages: string[] = [];
     for (let i = 0; i < MAX_OFFER_IMAGES_AMOUNT; i++) {
