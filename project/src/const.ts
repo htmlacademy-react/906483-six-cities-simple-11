@@ -6,6 +6,7 @@ export const URL_MARKER_CURRENT = 'img/pin-active.svg';
 export const INITIAL_CITY = 'Paris';
 export const INITIAL_SORT_VALUE = 'Popular';
 export const MIN_OFFER_SCORE = 1;
+export const MAX_REVIEW_COUNT = 10;
 
 export const ReviewTextLength = {
   Min: 50,
