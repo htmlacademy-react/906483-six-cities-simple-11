@@ -2,11 +2,11 @@ import {logoutAction} from '../../store/api-actions';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {redirectToRoute} from '../../store/action';
 import {AppRoute} from '../../const';
+import {getUserData} from '../../store/user-process/selectors';
 
 function HeaderNav(): JSX.Element {
   const dispatch = useAppDispatch();
-  const userData = useAppSelector((state) => state.userData);
-
+  const userData = useAppSelector(getUserData);
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">

@@ -3,15 +3,15 @@ import {useEffect} from 'react';
 import {useAppSelector} from '../../hooks';
 import {calculateRating, getRandomOfferImages} from '../../utils';
 import {store} from '../../store';
-import {Offer} from '../../types/offer';
 import {fetchNearbyOffers, fetchOfferAction, fetchReviews} from '../../store/api-actions';
-import HeaderNav from '../../components/header-nav/header-nav';
-import Logo from '../../components/logo/logo';
 import ReviewList from '../../components/review-list/review-list';
 import ReviewForm from '../../components/review-form/review-form';
 import Map from '../../components/map/map';
 import OfferList from '../../components/offer-list/offer-list';
 import LoadingScreen from '../loading-screen/loading-screen';
+import Header from '../../components/header/header';
+import {getUserData} from '../../store/user-process/selectors';
+import {getNearbyOffers, getOffer, getReviews} from '../../store/offer-data/selectors';
 
 function OfferScreen(): JSX.Element {
   const {id} = useParams();
@@ -23,10 +23,10 @@ function OfferScreen(): JSX.Element {
     store.dispatch(fetchReviews((currentOfferId)));
   }, [currentOfferId]);
 
-  const isUserData = useAppSelector((state) => Boolean(state.userData));
-  const offer = useAppSelector((state) => state.offer) as Offer;
-  const nearOffers = useAppSelector((state) => state.nearbyOffers);
-  const reviews = useAppSelector((state) => state.reviews);
+  const isUserData = useAppSelector(getUserData);
+  const offer = useAppSelector(getOffer);
+  const nearOffers = useAppSelector(getNearbyOffers);
+  const reviews = useAppSelector(getReviews);
 
   if (!offer) {
     return <LoadingScreen />;
@@ -55,16 +55,7 @@ function OfferScreen(): JSX.Element {
 
   return (
     <>
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <HeaderNav />
-          </div>
-        </div>
-      </header>
+      <Header />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">

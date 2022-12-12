@@ -1,12 +1,13 @@
 import cn from 'classnames';
 import {useState, MouseEvent} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {setActiveSortValue} from '../../store/action';
+import {setActiveSortValue} from '../../store/app-process/app-process';
 import {SortOption} from '../../const';
+import {getActiveSortValue} from '../../store/app-process/selectors';
 
 function SortOptions(): JSX.Element {
   const dispatch = useAppDispatch();
-  const activeSortValue = useAppSelector((state) => state.activeSortValue);
+  const activeSortValue = useAppSelector(getActiveSortValue);
   const [isSortVisible, setSortVisible] = useState(false);
 
   const changeSortVisibleHandle = (evt: MouseEvent<HTMLSpanElement>) => {
@@ -14,7 +15,7 @@ function SortOptions(): JSX.Element {
   };
   const optionClickHandle = (evt: MouseEvent) => {
     const target = evt.target as HTMLLIElement;
-    dispatch(setActiveSortValue({sortValue: target.innerText}));
+    dispatch(setActiveSortValue(target.innerText));
   };
 
   return (

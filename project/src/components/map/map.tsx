@@ -10,7 +10,7 @@ import 'leaflet/dist/leaflet.css';
 type MapProps = {
   city: City;
   offers: Offers;
-  selectedPoint: Offer | undefined;
+  selectedPoint: Offer | null;
   cssClass: string;
 };
 

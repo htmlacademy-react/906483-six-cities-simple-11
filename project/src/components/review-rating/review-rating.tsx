@@ -3,12 +3,13 @@ import {ChangeEvent, Fragment} from 'react';
 type ReviewRatingProps = {
   element: {
     title: string;
-    value: string;
+    value: number;
   };
+  rating: string;
   onRatingChange: (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void;
 }
 
-function ReviewRating({element, onRatingChange}: ReviewRatingProps): JSX.Element {
+function ReviewRating({element, onRatingChange, rating}: ReviewRatingProps): JSX.Element {
   return (
     <Fragment key={element.value}>
       <input
@@ -17,6 +18,7 @@ function ReviewRating({element, onRatingChange}: ReviewRatingProps): JSX.Element
         value={element.value}
         id={`${element.value}-stars`}
         type="radio"
+        checked={element.value === Number(rating)}
         onChange={onRatingChange}
       />
       <label
